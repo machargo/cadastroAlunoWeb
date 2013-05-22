@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <h:graphicImage id="image" alt="eniac" url="/imagens/logo.png" />
+        
+        <title>CADASTRO DE ALUNO </title>
+        
+        <style>
+            .ui-widget,   
+            .ui-widget .ui-widget {   
+                font-size: 12px !important;   
+            } 
+        </style>
+        
+    </h:head>
+    <h:body>        
+        <h:form>
+            <p:panel  header="CADASTRO DE ALUNOS" 
+                      style="width:300px; text-align: center">
+                <h:panelGrid columns="2">
+                    <h:outputText value ="Nome"/>
+                    <h:inputText value ="#{cadastradorAlunoBean.aluno.nome}"/>
+                    <h:outputText value ="RA"/>
+                    <h:inputText value ="#{cadastradorAlunoBean.aluno.ra}" 
+                           readonly="#{cadastradorAlunoBean.bloqueadorInput}"/>
+                    <p:commandButton 
+                        action="#{cadastradorAlunoBean.botaoSalvar()}" 
+                        value="#{cadastradorAlunoBean.nomeBotao}" ajax="false"/>
+                   </h:panelGrid>
+            </p:panel>
+            <hr/>          
+            <h:panelGrid columns="2">
+            <p:dataTable value="#{cadastradorAlunoBean.alunos}" var="aluno">
+                <p:column style="width: 250px">
+                    <f:facet name="header">Aluno</f:facet>
+                    <h:outputText value="#{aluno.nome}"/>
+                </p:column>
+                <p:column style="width: 250px"> 
+                    <f:facet name="header">RA</f:facet>
+                    <h:outputText value="#{aluno.ra}"/>
+                </p:column>
+                <p:column>
+                 <p:commandButton action="#{cadastradorAlunoBean.editar(aluno)}" 
+                                     value="Editar" ajax="false"  />
+                </p:column>
+ 
+                <p:column>
+                 <p:commandButton action="#{cadastradorAlunoBean.apagar(aluno)}" 
+                                     value="Excluir" ajax="false" />
+                </p:column>
+
+            </p:dataTable>                       
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
